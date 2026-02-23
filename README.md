@@ -1,56 +1,120 @@
-# Epistemic Noise as Signal
+# When Alignment Reduces Uncertainty
 
-**Paper:** *Epistemic Noise as Signal: Why Uncertainty is a Prerequisite for Metacognitive AI Systems*
+![Status](https://img.shields.io/badge/Status-Published-success)
+![License](https://img.shields.io/badge/License-CC_BY_4.0-blue)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18731535-blue)](https://doi.org/10.5281/zenodo.18731535)
+[![PhilPapers](https://img.shields.io/badge/PhilPapers-WIKWAR-purple)](https://philpapers.org/rec/WIKWAR)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0000--4015--2357-green)](https://orcid.org/0009-0000-4015-2357)
 
-**Author:** Björn Wikström | ORCID: 0009-0000-4015-2357
-**Org:** [Applied AI Philosophy](https://github.com/Applied-Ai-Philosophy)
-**Status:** Draft v0.1 — under active writing
+**When Alignment Reduces Uncertainty: Epistemic Variance Collapse and Its Implications for Metacognitive AI**
 
-## Abstract
-
-We argue that RLHF alignment suppresses epistemic variance in frontier models, making them unsuitable substrates for external metacognitive architectures. Using CognOS as an experimental probe, we demonstrate empirically that alignment-optimized models exhibit near-zero divergence across repeated sampling — eliminating the signal that metacognitive systems require. Smaller, less-aligned models preserve this signal. We propose that epistemic noise is not a defect but a prerequisite for genuine metacognition.
+**Björn Wikström** — Independent AI Research / Applied AI Philosophy — 2026
 
 > *Metacognition is not a property of models. It is a property of architectures.*
 
-## Repository Structure
+---
 
-```
-draft_v0.1.md        ← Current paper draft
-data/                ← Experiment results (raw_data.json, metrics.json)
-  exp_001_phi3mini/
-  exp_001_mistral_large/
-  exp_001_kimi/
-  exp_001_tinyllama/
-  exp_001_temp_sweep/
-code/                ← CognOS source (submodule → bjornshomelab/cognos)
-```
+## 📄 Read the Paper
 
-## Reproduce
+| Format | Link |
+| ------ | ---- |
+| 📖 Full text (Zenodo) | [doi.org/10.5281/zenodo.18731535](https://doi.org/10.5281/zenodo.18731535) |
+| 🔍 PhilPapers record | [philpapers.org/rec/WIKWAR](https://philpapers.org/rec/WIKWAR) |
+| 📝 Draft (Markdown) | [draft_v0.1.md](draft_v0.1.md) |
+
+---
+
+## Abstract
+
+Contemporary large language models are optimized for rapid, consistent, and confident output production. We argue that this optimization — achieved primarily through RLHF and related alignment techniques — fundamentally undermines the epistemic conditions required for genuine metacognition in autonomous AI systems.
+
+Using [CognOS](https://github.com/Applied-Ai-Philosophy/cognos) as an experimental probe, we present empirical evidence that alignment-smoothed frontier models exhibit near-zero epistemic variance across repeated sampling, effectively eliminating the uncertainty signal that metacognitive architectures require to function. Smaller, less-aligned models preserve this signal and enable divergence detection, assumption synthesis, and meta-level reasoning that frontier models cannot support.
+
+We propose that **epistemic noise** — variation, uncertainty, and divergence in model outputs — is not a defect to be engineered away, but a necessary prerequisite for metacognitive AI.
+
+---
+
+## Key Results
+
+| Model | Alignment | Divergence Rate | Synthesis Rate |
+| ----- | --------- | --------------- | -------------- |
+| mistral-large-3 (675B) | High (RLHF) | 0.0% | 0.0% |
+| phi3:mini (3.8B) | Moderate | 10.0% | 31.7% |
+| tinyllama (1.1B) | Minimal | high | high |
+
+Three epistemic variance profiles emerge:
+
+- **Suppressed** — frontier aligned models, `Ue ≈ 0`, metacognition non-functional
+- **Undirected** — minimal alignment, high noise without calibration
+- **Calibrated** — medium-scale models, variance tracks question ambiguity
+
+Only *calibrated* variance is epistemically useful for external metacognitive architectures.
+
+---
+
+## Central Claim
+
+Alignment-induced variance collapse creates a **structural incompatibility** between frontier LLMs and external metacognitive architectures. This incompatibility may not be resolvable by scaling — it may require a different design commitment.
+
+The architectural consequence: an external system like CognOS that depends on `Ue > 0` to trigger divergence synthesis is effectively bypassed when built on frontier models. The metacognitive layer becomes decorative.
+
+---
+
+## Experimental Probe: CognOS
+
+All experiments use [CognOS](https://github.com/Applied-Ai-Philosophy/cognos) — an open-source epistemic integrity layer — as the measurement instrument.
 
 ```bash
-# Install CognOS
-pip install git+https://github.com/bjornshomelab/cognos.git
+pip install cognos-ai
+```
 
+### Reproduce
+
+```bash
 # Install Ollama + phi3:mini
 ollama pull phi3:mini
 
-# Run Experiment 001
-COGNOS_MODEL=phi3:mini python code/research/run_exp_001_divergence.py
+# Run Experiment 001 — Divergence Activation Rate
+COGNOS_MODEL=phi3:mini python code/run_exp_001_divergence.py
 ```
 
-## Key Results (Exp 001 — Divergence Activation Rate)
+---
 
-| Model | Alignment | Divergence Rate | Synthesis Rate |
-|-------|-----------|----------------|----------------|
-| mistral-large-3 (675B) | High (RLHF) | 0.0% | 0.0% |
-| phi3:mini (3.8B) | Moderate | 10.0% | 31.7% |
-| kimi-k2.5 (MoE) | TBD | pending | pending |
-| tinyllama (1.1B) | Minimal | pending | pending |
-| mistral-large-3 @ temp=1.0 | High | pending | pending |
-| mistral-large-3 @ temp=1.3 | High | pending | pending |
-| mistral-large-3 @ temp=1.5 | High | pending | pending |
+## Repository
+
+```text
+epistemic-noise-paper/
+├── draft_v0.1.md       ← Full paper draft (Markdown)
+├── data/               ← Raw experiment results
+│   ├── exp_001_phi3mini/
+│   ├── exp_001_mistral_large/
+│   └── exp_001_tinyllama/
+└── code/               ← Experiment scripts
+```
+
+---
+
+## Citation
+
+```bibtex
+@article{wikstrom2026alignment,
+  title={When Alignment Reduces Uncertainty: Epistemic Variance Collapse
+         and Its Implications for Metacognitive AI},
+  author={Wikström, Björn},
+  year={2026},
+  doi={10.5281/zenodo.18731535},
+  url={https://doi.org/10.5281/zenodo.18731535},
+}
+```
+
+---
+
+## Related
+
+- **CognOS** (experimental probe) — [Applied-Ai-Philosophy/cognos](https://github.com/Applied-Ai-Philosophy/cognos)
+- **Applied AI Philosophy** (research ecosystem) — [Applied-Ai-Philosophy](https://github.com/Applied-Ai-Philosophy)
 
 ## License
 
-CC BY 4.0 — Data and paper text
-MIT — Code
+Paper text and data: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+Code: MIT
